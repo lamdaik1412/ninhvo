@@ -7,8 +7,9 @@ export function getArgs(ctx, cmd) {
   return t.slice(p.length).trim();
 }
 export function escapeMD(s = "") {
-  return s.replace(/([_*[\]()~`>#+\\-=|{}.!\\])/g, "\\$1");
+  return s.replace(/([_*\[\]()~`>#+=|{}.!\\-])/g, "\\$1");
 }
+
 export const clampInt = (n, lo, hi) => Math.max(lo, Math.min(hi, n | 0));
 export const isPhotoLike = (m) =>
   (m?.photo && m.photo.length) ||
