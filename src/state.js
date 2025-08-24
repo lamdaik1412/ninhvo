@@ -11,6 +11,7 @@ export function loadState() {
     notes: new Map(),
     bags: new Map(),
     timers: new Map(),
+    daily: new Map(),
     weddingDateISO: "2025-08-17",
   };
   try {
@@ -25,6 +26,7 @@ export function loadState() {
     (j.notes || []).forEach(([k, v]) => state.notes.set(Number(k), v));
     (j.bags || []).forEach(([k, v]) => state.bags.set(Number(k), v));
     (j.timers || []).forEach(([k, v]) => state.timers.set(Number(k), v));
+    (j.daily || []).forEach(([k, v]) => state.daily.set(Number(k), v));
   } catch (e) {
     console.warn("Load state error:", e.message);
   }
@@ -42,6 +44,7 @@ export function saveState(state) {
       notes: Array.from(state.notes.entries()),
       bags: Array.from(state.bags.entries()),
       timers: Array.from(state.timers.entries()),
+      daily: Array.from(state.daily.entries()),
     };
     fs.writeFileSync(SAVE_FILE, JSON.stringify(j));
   } catch (e) {

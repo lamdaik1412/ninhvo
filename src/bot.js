@@ -10,6 +10,7 @@ import { registerNotesShopping } from "./features/notes_shopping.js";
 import { registerTimer } from "./features/timer.js";
 import { registerPoemStory } from "./features/poem_story.js";
 import { registerMisc } from "./features/misc.js";
+import { registerDaily } from "./features/daily.js";
 import * as utils from "./utils.js";
 import * as content from "./content.js";
 
@@ -56,7 +57,7 @@ export async function buildBot({ PUBLIC_URL = "", WEBHOOK_SECRET_PATH }) {
   registerTimer(bot, { state, utils, content });
   registerPoemStory(bot, { state, utils, content });
   registerMisc(bot, { state, utils, content });
-
+  registerDaily(bot, { state, utils, content });
   // autosave on exit
   process.on("SIGINT", () => {
     saveState(state);
@@ -117,6 +118,10 @@ export async function setCommands(bot) {
       { command: "echo", description: "Lặp lại an toàn" },
       { command: "ping", description: "Kiểm tra phản hồi" },
       { command: "uptime", description: "Thời gian chạy" },
+
+      { command: "nvstart", description: "Bật phát thanh 8:00 mỗi ngày" },
+      { command: "nvstop", description: "Tắt phát thanh hằng ngày" },
+      { command: "nvtime", description: "Đổi giờ phát thanh (HH:mm)" },
     ]);
   } catch (e) {
     console.error("setMyCommands error:", e);
