@@ -103,3 +103,19 @@ export function parseHHmm(s) {
   if (h < 0 || h > 23 || mm < 0 || mm > 59) return null;
   return { hour: h, minute: mm };
 }
+
+export function parseMoney(s) {
+  if (!s) return null;
+  const m = s.replace(/[,.\s]/g, "").match(/^(\d+)([kKmMbB]?)$/);
+  if (!m) return null;
+  let n = parseInt(m[1], 10);
+  const suf = m[2].toLowerCase();
+  if (suf === "k") n *= 1_000;
+  if (suf === "m") n *= 1_000_000;
+  if (suf === "b") n *= 1_000_000_000;
+  return n;
+}
+
+export function fmtMoney(n) {
+  return n.toLocaleString("vi-VN");
+}

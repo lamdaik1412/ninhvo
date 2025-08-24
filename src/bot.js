@@ -11,6 +11,11 @@ import { registerTimer } from "./features/timer.js";
 import { registerPoemStory } from "./features/poem_story.js";
 import { registerMisc } from "./features/misc.js";
 import { registerDaily } from "./features/daily.js";
+import { registerATM } from "./features/atm.js";
+import { registerFinance } from "./features/finance.js";
+import { registerGames } from "./features/games.js";
+import { registerReminders } from "./features/reminders.js";
+import { registerPointsShop } from "./features/points_shop.js";
 import * as utils from "./utils.js";
 import * as content from "./content.js";
 
@@ -58,6 +63,11 @@ export async function buildBot({ PUBLIC_URL = "", WEBHOOK_SECRET_PATH }) {
   registerPoemStory(bot, { state, utils, content });
   registerMisc(bot, { state, utils, content });
   registerDaily(bot, { state, utils, content });
+  registerATM(bot, { state, utils, content });
+  registerFinance(bot, { state, utils, content });
+  registerGames(bot, { state, utils, content });
+  registerReminders(bot, { state, utils, content });
+  registerPointsShop(bot, { state, utils, content });
   // autosave on exit
   process.on("SIGINT", () => {
     saveState(state);
@@ -122,6 +132,33 @@ export async function setCommands(bot) {
       { command: "nvstart", description: "Bật phát thanh 8:00 mỗi ngày" },
       { command: "nvstop", description: "Tắt phát thanh hằng ngày" },
       { command: "nvtime", description: "Đổi giờ phát thanh (HH:mm)" },
+
+      { command: "atm", description: "In 'đơn xin kinh phí' dễ thương" },
+      { command: "cho", description: "Vợ cho tiền: /cho 200k [ghi chú]" },
+      { command: "balance", description: "Xem số dư quỹ vợ phát" },
+      { command: "trans", description: "Giao dịch gần nhất" },
+
+      { command: "goal", description: "Tạo mục tiêu: /goal iPad 20tr" },
+      { command: "goallist", description: "Danh sách mục tiêu" },
+      { command: "goalset", description: "Chọn mục tiêu active" },
+      { command: "goalpay", description: "Nạp vào mục tiêu từ quỹ" },
+      { command: "goalclear", description: "Xoá mục tiêu" },
+
+      { command: "slot", description: "Máy kéo xin tiền 🎰" },
+      { command: "trivia", description: "Câu đố tình yêu" },
+      { command: "answer", description: "Trả lời trivia" },
+
+      { command: "habitstart", description: "Bật nhắc nịnh (sáng/tối)" },
+      { command: "habitstop", description: "Tắt nhắc nịnh" },
+      { command: "habitadd", description: "Thêm giờ nhắc" },
+      { command: "habitlist", description: "Xem giờ nhắc" },
+      { command: "habitdel", description: "Xoá giờ nhắc" },
+
+      { command: "votepoint", description: "Cộng điểm thưởng" },
+      { command: "points", description: "Xem điểm" },
+      { command: "shop", description: "Xem shop quà" },
+      { command: "redeem", description: "Đổi quà" },
+      { command: "vouchers", description: "Danh sách voucher" },
     ]);
   } catch (e) {
     console.error("setMyCommands error:", e);
